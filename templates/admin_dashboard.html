@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Relax.Hamulic</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='admin_styles.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <header>
+            <h1>Admin Dashboard</h1>
+            <nav>
+                <a href="{{ url_for('admin_dashboard') }}" class="nav-btn">Buchungen</a>
+                <a href="{{ url_for('admin_experiences') }}" class="nav-btn">Erlebnisse</a>
+                <a href="{{ url_for('admin_rezensionen') }}" class="nav-btn">Rezensionen</a>
+                <a href="{{ url_for('admin_logout') }}" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            </nav>
+        </header>
+        <main>
+            <h2>Aktuelle Buchungen</h2>
+            <table class="bookings-table">
+                <thead>
+                    <tr>
+                        <th>Datum</th>
+                        <th>Name</th>
+                        <th>E-Mail</th>
+                        <th>Zeit</th>
+                        <th>Personen</th>
+                        <th>Anfragen</th>
+                        <th>Aktion</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for booking in bookings %}
+                    <tr>
+                        <td>{{ booking.date }}</td>
+                        <td>{{ booking.name }}</td>
+                        <td>{{ booking.email }}</td>
+                        <td>{{ booking.time }}</td>
+                        <td>{{ booking.persons }}</td>
+                        <td>{{ booking.requests }}</td>
+                        <td>
+                            <form action="{{ url_for('admin_cancel_booking', booking_id=booking.id) }}" method="POST">
+                                <button type="submit" class="cancel-btn"><i class="fas fa-times"></i> Stornieren</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </main>
+    </div>
+</body>
+</html>

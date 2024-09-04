@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Erlebnisse - Relax.Hamulic</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='admin_styles.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        .dashboard-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .experience-form {
+            margin-bottom: 20px;
+        }
+        .experience-form input,
+        .experience-form textarea,
+        .experience-form select {
+            display: block;
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .experience-form button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .experience-form button:hover {
+            background-color: #0056b3;
+        }
+        .experiences-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .experience-item {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            width: calc(33.333% - 20px);
+            box-sizing: border-box;
+        }
+        .experience-item img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+        .experience-item h3 {
+            margin: 10px 0;
+        }
+        .experience-item p {
+            margin: 5px 0;
+        }
+        .delete-btn {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .delete-btn:hover {
+            background-color: #c82333;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <header>
+            <h1>Admin Erlebnisse</h1>
+            <nav>
+                <a href="{{ url_for('admin_dashboard') }}" class="nav-btn">Buchungen</a>
+                <a href="{{ url_for('admin_experiences') }}" class="nav-btn">Erlebnisse</a>
+                <a href="{{ url_for('admin_rezensionen') }}" class="nav-btn">Rezensionen</a>
+                <a href="{{ url_for('admin_logout') }}" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            </nav>
+        </header>
+        <main>
+            <h2>Erlebnis hinzufügen</h2>
+            <form action="{{ url_for('admin_add_experience') }}" method="POST" enctype="multipart/form-data" class="experience-form">
+                <input type="text" name="title" placeholder="Titel" required>
+                <textarea name="description" placeholder="Beschreibung" required></textarea>
+                <select name="category" required>
+                    <option value="aktivitaeten">Aktivitäten</option>
+                    <option value="restaurants">Restaurants</option>
+                    <option value="uebernachtung">Übernachtungsmöglichkeiten</option>
+                </select>
+                <input type="file" name="image" accept="image/*" required>
+                <button type="submit">Hinzufügen</button>
+            </form>
+
+            <h2>Bestehende Erlebnisse</h2>
+            <div class="experiences-list">
+                {% for experience in experiences %}
+                <div class="experience-item">
+                    <img src="{{ url_for('static', filename='uploads/' + experience.image) }}" alt="{{ experience.title }}">
+                    <h3>{{ experience.title }}</h3>
+                    <p>{{ experience.description }}</p>
+                    <p>Kategorie: {{ experience.category }}</p>
+                    <form action="{{ url_for('admin_delete_experience', experience_id=experience.id) }}" method="POST" onsubmit="return confirm('Sind Sie sicher, dass Sie dieses Erlebnis löschen möchten?');">
+                        <button type="submit" class="delete-btn"><i class="fas fa-trash"></i> Löschen</button>
+                    </form>
+                </div>
+                {% endfor %}
+            </div>
+        </main>
+    </div>
+</body>
+</html>

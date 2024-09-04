@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Erlebnisse in Cazin - Relax.Hamulic</title>
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles2.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="{{ url_for('static', filename='Bilder/Logo.png') }}" alt="Relax.Hamulic Logo">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('index') }}">Pocetna</a></li>
+                <li><a href="{{ url_for('ueber_uns') }}">Cijene</a></li>
+                <li><a href="{{ url_for('unterkunft') }}">Ponuda</a></li>
+                <li><a href="{{ url_for('reservierung') }}">Rezervacija</a></li>
+                <li><a href="{{ url_for('erlebnisse') }}">Dozivljaji</a></li>
+                <li><a href="{{ url_for('rezension') }}">Rezensionen</a></li>
+                
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+        <section id="experiences">
+            <h1 class="main-title">Dozivljaji i Avanture u Cazinu</h1>
+            <div class="filter-buttons">
+                <button class="filter-button" data-category="all">Sve</button>
+                <button class="filter-button" data-category="aktivitaeten">Aktivnost</button>
+                <button class="filter-button" data-category="restaurants">Restorani</button>
+                <button class="filter-button" data-category="uebernachtung">Prenociste</button>
+            </div>
+            <div class="experience-container">
+                {% for experience in experiences %}
+                <div class="experience-box" data-category="{{ experience.category }}">
+                    <div class="image-container">
+                        <img src="{{ url_for('static', filename='uploads/' + experience.image) }}" alt="{{ experience.title }}">
+                    </div>
+                    <h2>{{ experience.title }}</h2>
+                    <p>{{ experience.description }}</p>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-section">
+            <h3>Kontakt</h3>
+            <p>Email: Relax.Hamulic@gmail.com</p>
+            <p>Tel: +387 123 456 789</p>
+        </div>
+        <div class="footer-section">
+            <h3>Pratite nas</h3>
+            <a href="https://www.instagram.com/relax.hamulic/"><i class="fab fa-instagram"></i> Instagram</a>
+        </div>
+        <p>&copy; 2024 Relax.Hamulic. Sva prava pridržana.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const filterButtons = document.querySelectorAll('.filter-button');
+            const experienceBoxes = document.querySelectorAll('.experience-box');
+
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const category = this.getAttribute('data-category');
+                    filterExperiences(category);
+                });
+            });
+
+            function filterExperiences(category) {
+                experienceBoxes.forEach(box => {
+                    if (category === 'all' || box.getAttribute('data-category') === category) {
+                        box.style.display = 'block';
+                    } else {
+                        box.style.display = 'none';
+                    }
+                });
+            }
+
+            // Zeige alle Einträge beim Laden der Seite
+            filterExperiences('all');
+        });
+    </script>
+</body>
+</html>

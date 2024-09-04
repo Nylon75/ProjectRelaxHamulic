@@ -1,0 +1,5 @@
+tcaornolambznhkb
+
+app.config['MAIL_USERNAME'] = 'Relax.Hamulic@gmail.com'  # Ersetzen Sie dies durch Ihre E-Mail-Adresse
+app.config['MAIL_PASSWORD'] = 'tcaornolambznhkb'  # Ersetzen Sie dies durch Ihr Passwort oder App-Passwort
+app.config['MAIL_DEFAULT_SENDER'] = 'Relax.Hamulic@gmail.com'  # Ersetzen Sie dies durch Ihre E-Mail-Adresse

@@ -1,0 +1,28 @@
+<h1>Potvrda rezervacije</h1>
+    <p>Poštovani/a {{ name }},</p>
+    <p>Hvala vam na vašoj rezervaciji u {{ season }}. Evo detalja:</p>
+    <ul>
+        <li>Datum: {{ date }}</li>
+        <li>Vrijeme: {{ time }}</li>
+        <li>Broj osoba: {{ persons }}</li>
+        <li>Posebni zahtjevi: {{ requests }}</li>
+        <li>Cijena: {{ price }} KM</li>
+    </ul>
+    
+    {% if season == 'zimska sezona' %}
+    <h2>Kako pravilno koristiti saunu</h2>
+    <p>Drago nam je što ste odabrali našu saunu tokom zimske sezone. Evo nekoliko savjeta za pravilno korištenje saune:</p>
+    <ol>
+        <li>Prije ulaska u saunu, obavezno se istuširajte i osušite.</li>
+        <li>Uđite u saunu sa čistim peškirom na kojem ćete sjediti.</li>
+        <li>Počnite sa kraćim boravcima u sauni (5-10 minuta) i postepeno produžavajte vrijeme.</li>
+        <li>Slušajte svoje tijelo. Ako se osjećate neugodno, izađite iz saune.</li>
+        <li>Između sesija u sauni, rashladite se tušem ili boravkom na svježem zraku.</li>
+        <li>Pijte dosta vode prije, tokom i nakon korištenja saune kako biste nadoknadili izgubljenu tečnost.</li>
+        <li>Nakon posljednje sesije u sauni, istuširajte se i odmorite 10-15 minuta prije oblačenja.</li>
+    </ol>
+    <p>Uživajte u blagodatima saune i opustite se!</p>
+    {% endif %}
+
+<p>Radujemo se vašem dolasku!</p>
+<p>Srdačan pozdrav,<br>Relax Hamulić Tim</p>

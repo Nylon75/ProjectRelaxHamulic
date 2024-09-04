@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Rezensionen - Relax.Hamulic</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='admin_styles.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <header>
+            <h1>Admin Rezensionen</h1>
+            <nav>
+                <a href="{{ url_for('admin_dashboard') }}" class="nav-btn">Buchungen</a>
+                <a href="{{ url_for('admin_experiences') }}" class="nav-btn">Erlebnisse</a>
+                <a href="{{ url_for('admin_rezensionen') }}" class="nav-btn">Rezensionen</a>
+                <a href="{{ url_for('admin_logout') }}" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            </nav>
+        </header>
+        <main>
+            <h2>Alle Rezensionen</h2>
+            <div class="reviews-list">
+                {% for review in reviews %}
+                <div class="review-item">
+                    <h3>{{ review.name }}</h3>
+                    <p>Email: {{ review.email }}</p>
+                    <p>Bewertung: {{ review.rating }} Sterne</p>
+                    <p>Kommentar: {{ review.review }}</p>
+                    <form action="{{ url_for('admin_delete_review', review_id=review.id) }}" method="POST" onsubmit="return confirm('Sind Sie sicher, dass Sie diese Rezension löschen möchten?');">
+                        <button type="submit" class="delete-btn"><i class="fas fa-trash"></i> Löschen</button>
+                    </form>
+                    {% if not review.confirmed %}
+                    <form action="{{ url_for('admin_confirm_review', review_id=review.id) }}" method="POST">
+                        <button type="submit" class="confirm-btn"><i class="fas fa-check"></i> Bestätigen</button>
+                    </form>
+                    {% endif %}
+                </div>
+                {% endfor %}
+            </div>
+        </main>
+    </div>
+</body>
+</html>

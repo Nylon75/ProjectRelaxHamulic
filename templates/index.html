@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relax.Hamulic</title>
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles2.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="{{ url_for('static', filename='Bilder/Logo.png') }}" alt="Relax.Hamulic Logo">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('index') }}">Pocetna</a></li>
+                <li><a href="{{ url_for('ueber_uns') }}">Cijene</a></li>
+                <li><a href="{{ url_for('unterkunft') }}">Ponuda</a></li>
+                <li><a href="{{ url_for('reservierung') }}">Rezervacija</a></li>
+                <li><a href="{{ url_for('erlebnisse') }}">Dozivljaji</a></li>
+                <li><a href="{{ url_for('rezension') }}">Rezensionen</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section id="index">
+            <h1>Dobrodošli na Relax Hamulić, vašu idealnu destinaciju za opuštanje i uživanje!</h1>
+    
+            <h2>Otkrijte Oazu Mira i Opuštanja</h2>
+    
+            <p>U srcu netaknute prirode, gdje se susreću mir i udobnost, nalazi se Relax Hamulić. Naš prostor je pažljivo dizajniran kako bi vam pružio savršen ambijent za opuštanje i bijeg od svakodnevnog stresa. Uronite u atmosferu gdje je vaša privatnost na prvom mjestu, a svaki detalj osmišljen je da doprinese vašem potpunom miru.</p>
+    
+            <h2>Lokacija</h2>
+            <p>Nalazimo se u mjestu Krivaja, tačnije poslije Krivajske džamije, ako dolazite iz smjera Cazin. Skrenite desno 50 metara nakon džamije, zatim nastavite 1 km do prve kuće desno u selu Hamulić.</p>
+    
+            <h2>Pravila Kućnog Reda u Relax Hamulić</h2>
+            <p>Kako bismo osigurali ugodan i siguran boravak za sve naše posjetitelje, molimo vas da se pridržavate sljedećih pravila:</p>
+            <ul class="custom-list">
+                <li><strong>Ne Skakati u Bazen:</strong> Molimo vas da izbjegavate skakanje u bazen kako biste osigurali sigurnost svih gostiju i očuvali naš bazen u dobrom stanju.Molimo vas da izbjegavate skakanje u bazen kako biste osigurali sigurnost svih gostiju i očuvali naš bazen u dobrom stanju.</li>
+                <li><strong>Prije Ulaska u Bazen Tuširanje:</strong> Radi očuvanja čistoće bazena i zdravlja svih korisnika, obavezno se istuširajte prije ulaska u bazen.</li>
+                <li><strong>Zabranjeno Unošenje Alkohola:</strong>Kako bismo očuvali ugodan ambijent i sigurnost, unos alkohola u prostor bazena i saune nije dozvoljen.</li>
+                <li><strong>Održavanje Čistoće:</strong> Molimo vas da čuvate čistoću u svim prostorima. Koristite spremnike za otpad i postavite upotrijebljene stvari na predviđena mjesta kako bismo zajedno održavali naš prostor urednim i prijatnim za sve.</li>
+            </ul>
+            
+            <h2>Naša Filozofija</h2>
+            <p>U Relax Hamuliću, vjerujemo da je pravo opuštanje umjetnost. Naša misija je pružiti vam prostor gdje možete obnoviti svoje tijelo i duh, u harmoniji s prirodom. Svaki aspekt našeg prostora, od dizajna do usluga, pažljivo je kreiran kako bi vam pružio jedinstveno iskustvo relaksacije.</p>
+
+            <h2>Posjetite Nas</h2>
+            <p>Dođite i doživite jedinstveno iskustvo relaksacije koje će vas osvježiti i obnoviti. Bilo da tražite trenutak mira sami, romantičan bijeg s voljenom osobom ili opuštajući dan s prijateljima, Relax Hamulić je vaše idealno utočište. Dobrodošli u Relax Hamulić, vaše utočište mira i spokoja</p>
+    
+            <p>Dobrodošli u Relax Hamulić, vaše utočište mira i relaksacije!</p>
+            <a href="{{ url_for('reservierung') }}" class="cta-button">Odma rezervisi</a>
+        </section>
+    </main>
+    <!-- Weitere Abschnitte folgen hier -->
+    <footer>
+        <div class="footer-section">
+            <h3>Kontakt</h3>
+            <p>Email: Relax.Hamulic@gmail.com</p>
+            <p>Tel: +387 123 456 789</p>
+        </div>
+        <div class="footer-section">
+            <h3>Pratite nas</h3>
+            <a href="https://www.instagram.com/relax.hamulic/"><i class="fab fa-instagram"></i> Instagram</a>
+        </div>
+    </div>
+        <p>&copy; 2024 Relax.Hamulic. Sva prava pridržana.</p>
+        <a href="{{ url_for('admin_login') }}" class="admin-link" title="Admin Login">
+            <i class="fas fa-user-cog"></i>
+        </a>
+    </footer>
+</body>
+</html>

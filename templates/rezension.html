@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rezensionen - Relax.Hamulic</title>
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles2.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="{{ url_for('static', filename='Bilder/Logo.png') }}" alt="Relax.Hamulic Logo">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('index') }}">Početna</a></li>
+                <li><a href="{{ url_for('ueber_uns') }}">Cijene</a></li>
+                <li><a href="{{ url_for('unterkunft') }}">Smještaj</a></li>
+                <li><a href="{{ url_for('reservierung') }}">Rezervacija</a></li>
+                <li><a href="{{ url_for('erlebnisse') }}">Doživljaji</a></li>
+                <li><a href="{{ url_for('rezension') }}">Recenzije</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+        <section id="reviews">
+            <h1>Vaše mišljenje nam je važno</h1>
+            <form id="review-form">
+                <input type="text" name="name" placeholder="Ime" required>
+                <input type="email" name="email" placeholder="E-Mail" required>
+                <div class="star-rating">
+                    <input type="radio" id="star5" name="rating" value="5" required/>
+                    <label for="star5" title="5 zvjezdica">&#9733;</label>
+                    <input type="radio" id="star4" name="rating" value="4"/>
+                    <label for="star4" title="4 zvjezdice">&#9733;</label>
+                    <input type="radio" id="star3" name="rating" value="3"/>
+                    <label for="star3" title="3 zvjezdice">&#9733;</label>
+                    <input type="radio" id="star2" name="rating" value="2"/>
+                    <label for="star2" title="2 zvjezdice">&#9733;</label>
+                    <input type="radio" id="star1" name="rating" value="1"/>
+                    <label for="star1" title="1 zvjezdica">&#9733;</label>
+                </div>
+                <textarea name="review" placeholder="Vaša recenzija" required rows="5"></textarea>
+                <button type="submit">Pošalji recenziju</button>
+            </form>
+            <h2>Recenzije</h2>
+            <div class="reviews-list">
+            {% for review in reviews %}
+            <div class="review-item">
+                <div class="star-rating-display">
+                    {% for i in range(5) %}
+                    {% if i < review.rating %}
+                        <span class="star filled">&#9733;</span>
+                    {% else %}
+                        <span class="star">&#9733;</span>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            <p>Komentar: {{ review.review }}</p>
+        </div>
+        {% endfor %}
+</div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-section">
+            <h3>Kontakt</h3>
+            <p>Email: Relax.Hamulic@gmail.com</p>
+            <p>Tel: +387 123 456 789</p>
+        </div>
+        <div class="footer-section">
+            <h3>Pratite nas</h3>
+            <a href="https://www.instagram.com/relax.hamulic/"><i class="fab fa-instagram"></i> Instagram</a>
+        </div>
+        <p>&copy; 2024 Relax.Hamulic. Sva prava pridržana.</p>
+    </footer>
+
+    <script>
+        document.getElementById('review-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const formData = new FormData(this);
+            fetch('{{ url_for("submit_review") }}', {
+                method: 'POST',
+                body: formData,
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('Hvala vam na vašoj recenziji!');
+                    this.reset();
+                } else {
+                    alert('Došlo je do problema prilikom slanja vaše recenzije. Molimo pokušajte ponovo kasnije.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Došlo je do problema prilikom slanja vaše recenzije. Molimo pokušajte ponovo kasnije.');
+            });
+        });
+    </script>
+</body>
+</html>
